@@ -37,7 +37,6 @@ export const GetCollection = (collectionName) => {
 
 export const GetDocumentById = (collectionName, id) => {
   const [dataBD, setDataBD] = useState({});
-  console.log("GetDocumentById", id);
   const [loadingBd, setLoadingBd] = useState(true);
   const [errorBd, setErrorBd] = useState(null);
 
@@ -208,7 +207,6 @@ export const FilterCollectionWord = (
 
 export const fetchItems = async (ItemsSearch) => {
   try {
-    console.log(ItemsSearch);
     const promises = ItemsSearch.map(async (item) => {
       const itemRef = doc(db, "Productos", item.productId);
 

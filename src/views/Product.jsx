@@ -1,10 +1,11 @@
 import { useParams } from "react-router-dom";
+import ErrorPage from "../componentsUI/ErrorPage";
+import Card from "../componentsUI/Card";
 import { useEffect, useState } from "react";
 import { useCart } from "../context/CartContext";
 import SideBar from "../componentsUI/SideBar";
 import { GetDocumentById } from "../hooks/useFirestore";
 import Loading from "../componentsUI/Loading";
-import ErrorPage from "../componentsUI/ErrorPage";
 
 function Product() {
   const { productId } = useParams();
@@ -76,16 +77,16 @@ function Product() {
   return (
     <div className="flex flex-col md:flex-row p-4">
       <div
-        className={`w-[36rem] mt-2 mb-2 ml-1 mr-1 relative ${
+        className={`w-full md:w-[36rem] mt-2 mb-2 md:ml-1 md:mr-1 relative ${
           productPage.oferta === 1 ? "border-yellow-500 border-4" : ""
         }`}
-      >       
+      >
         {productPage.oferta === 1 && (
           <div className="absolute top-0 right-0 mt-2 mr-2 bg-yellow-200 py-1 px-2 rounded">
             🔥 OFERTA
           </div>
         )}
-        <div className="w-3/4 p-4">
+        <div className="w-full md:w-3/4 p-4">
           <h1 className="text-3xl font-semibold mb-2">
             {productPage.Producto}
           </h1>
@@ -124,11 +125,11 @@ function Product() {
             </button>
           )}
         </div>
-        <div className="w-1/4 ml-4 mt-4">
+        <div className="w-full md:w-1/4 ml-0 md:ml-4 mt-4 md:mt-0">
           <img
             src={productPage.url}
             alt={productPage.Producto}
-            className="w-full h-auto md:float-right"
+            className="w-full h-auto"
           />
         </div>
       </div>

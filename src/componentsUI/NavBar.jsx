@@ -4,6 +4,7 @@ import {
   HeartIcon,
   SparklesIcon,
   HomeIcon,
+  Bars4Icon,
 } from "@heroicons/react/24/solid";
 import Footer from "./Footer";
 import { useCart } from "../context/CartContext";
@@ -21,6 +22,8 @@ function NavBar() {
   const loadingType = "NavBar";
   const navigate = useNavigate();
 
+  
+  
   useEffect(() => {
     setData(dataBD || []);
   }, [dataBD]);
@@ -32,7 +35,7 @@ function NavBar() {
   const handleSearch = (e) => {
     e.preventDefault();
     navigate(`/resultado/${searcherWord}`);
-   // setSearcherWord("");
+    setSearcherWord("");
   };
 
   return (

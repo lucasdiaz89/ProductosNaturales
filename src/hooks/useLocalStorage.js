@@ -16,7 +16,6 @@ export function useLocalStorage(key, initialValue) {
       setCartStorage(newValue);
       window.localStorage.setItem(key, JSON.stringify(newValue));
     } catch (err) {
-      console.log("Error LocalStorage:",err);
     }
   };
 

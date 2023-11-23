@@ -34,7 +34,6 @@ useEffect(()=>{
   if(productsSeller.length!==0){
   setProductsToShow(productsSeller.slice(currentIndex, currentIndex + 2));
   }
-  console.log(productsToShow);
 },[productsSeller,currentIndex]);
 
   return (

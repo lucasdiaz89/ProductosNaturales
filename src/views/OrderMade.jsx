@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useCart } from "../context/CartContext";
-
+import { phone } from "../components/phone";
 function OrderMade() {
   const { idOrder } = useParams();
   const { cartItems, totalPrice,emptyCart } = useCart();
-  const [number, setNumber] = useState("3512263396");
-
+  const [number, setNumber] = useState(phone);
   const [message, setMessage] = useState("");
 
   useEffect(() => {

@@ -1,10 +1,13 @@
 import { ShoppingCartIcon } from "@heroicons/react/24/solid";
 import { useCart } from "../context/CartContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function NavBarHorizontal() {
   const { itemsInCart } = useCart();
-console.log("navBarHorizontal");
+  const navigate=useNavigate();
+  const handleLogin =()=>{
+    navigate("/muyPronto");
+  }
   return (
     <div className="fixed top-0 left-0 right-0 z-50">
       <div className="flex justify-between items-center p-2 border-b bg-lime-50 text-green-900 w-full">
@@ -26,7 +29,7 @@ console.log("navBarHorizontal");
               )}
             </div>
           </Link>
-          <button className="text-blue-500 hover:text-blue-700">Iniciar sesión</button>
+          <button className="text-blue-500 hover:text-blue-700" onClick={handleLogin}>Iniciar sesión</button>
         </div>
       </div>
     </div>

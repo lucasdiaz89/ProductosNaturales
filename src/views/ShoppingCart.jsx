@@ -71,7 +71,7 @@ function ShoppingCart() {
     setShowForm(true);
     setTimeout(() => {
       if (formRef.current) {
-        formRef.current.scrollIntoView({ behavior: "smooth",block: "center" });
+        formRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
       }
     }, 0);
   };
@@ -93,8 +93,9 @@ function ShoppingCart() {
           setLoadingBuying(false);
           setDataMO({ id: res.id, ...res });
         } else {
-          setErrorMO =
-            "No se pudo completar la orden, Intente nuevamente mas tarde. Disculpe las molestias ocacionadas.";
+          setErrorMO(
+            "No se pudo completar la orden, Intente nuevamente mas tarde. Disculpe las molestias ocacionadas."
+          );
         }
       });
     }, 3000);
@@ -115,8 +116,8 @@ function ShoppingCart() {
         </div>
       ) : (
         <>
-          <div className="flex p-12 border my-4">
-            <div className="flex flex-col w-2/3 pr-4 border-r">
+          <div className="flex flex-col md:flex-row p-4">
+            <div className="flex flex-col w-full md:w-2/3 pr-0 md:pr-4 border-b md:border-b-0 md:border-r mb-4 md:mb-0">
               <h2 className="text-2xl font-semibold mb-4 bg-gray-200 p-2">
                 Productos
               </h2>
@@ -177,7 +178,7 @@ function ShoppingCart() {
                 ))
               )}
             </div>
-            <div className="flex flex-col w-1/3 pl-4">
+            <div className="flex flex-col w-full md:w-1/3 pl-0 md:pl-4">
               {loadingTotal ? (
                 <div>{<Loading type={loadingTypeTotal} />}</div>
               ) : (
@@ -204,8 +205,13 @@ function ShoppingCart() {
                     </div>
                   </div>
                   <button
-                    className="mt-4 bg-blue-500 text-white font-bold py-2 px-4 rounded"
+                    className={`mt-4 bg-blue-500 text-white font-bold py-2 px-4 rounded ${
+                      cartStorage.length > 0
+                        ? ""
+                        : "opacity-50 cursor-not-allowed"
+                    }`}
                     onClick={handleMakeAnOrder}
+                    disabled={cartStorage.length === 0}
                   >
                     Realizar Pedido
                   </button>

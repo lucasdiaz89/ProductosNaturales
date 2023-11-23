@@ -24,7 +24,6 @@ function Card({ product, categoryId }) {
       productId:newProduct.id,
       productCount:quantity
     }
-    console.log(newItemCart);
     isInCart(newItemCart.productId)
       ? updateQuantity(newItemCart)
       : addToCart(newItemCart);

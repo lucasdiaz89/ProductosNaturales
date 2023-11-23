@@ -23,7 +23,7 @@ export function CartProvider({ children }) {
     );
     updateCartStorage(updatedCart);
     if (cartItems.length > 0) {
-      cartItems = cartItems.filter(itemCart => itemCart.id !== item.productId);
+      setCartItems(cartItems.filter(itemCart => itemCart.id !== item.productId));
   }
   };
 
