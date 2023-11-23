@@ -75,52 +75,63 @@ function NavBarMobile() {
   }
   return (
     <>
-      <div className="fixed top-0 left-0 right-0 z-50">
-        <div className="flex justify-between items-center p-2 border-b bg-lime-50 text-green-900 w-full">
-          <div className="flex items-center">
-            <button onClick={viewCategory}>
-              <Bars4Icon className="w-8 h-8" title="Menú" />
-            </button>
-          </div>
-          <div className="flex items-center">
-            <Link to="/">
-              <h1 className="text-xl font-bold">PRODUCTOS NATURALES NORMA</h1>
-            </Link>
-          </div>
-          <form id="search-form" role="search" className="mt-2 flex" onSubmit={handleSearch}>
-            <input
-              id="q"
-              aria-label="Search contacts"
-              placeholder="Buscar productos"
-              type="search"
-              name="q"
-              value={searcherWord}
-              onChange={(e) => setSearcherWord(e.target.value)}
-              className="border p-2 rounded-l outline-none w-full"
-            />
-            <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-r">
-              Buscar
-            </button>
-          </form>
-          <div className="flex items-center space-x-4">
-            <Link to="/carrito">
-              <div className="relative group">
-                <ShoppingCartIcon className="w-8 h-8" title="Mi Carrito" />
-                {itemsInCart > 0 && (
-                  <div className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-semibold rounded-full w-5 h-5 flex items-center justify-center">
-                    {itemsInCart}
-                  </div>
-                )}
-              </div>
-            </Link>
-            <button className="text-blue-500 hover:text-blue-700" onClick={handleLogin}>
-              Iniciar sesión
-            </button>
-          </div>
+    <div className="fixed top-0 left-0 right-0 z-50 bg-lime-50 text-green-900">
+      <div className="flex justify-between items-center p-2 border-b">
+        <div className="flex items-center">
+          <button onClick={() => setMenuVisible(!menuVisible)}>
+            <Bars4Icon className="w-8 h-8" title="Menú" />
+          </button>
+        </div>
+        <div className="flex items-center flex-grow">
+          <Link to="/">
+            <h1 className="text-xl font-bold">PRODUCTOS NATURALES NORMA</h1>
+          </Link>
+        </div>
+        <form
+          id="search-form"
+          role="search"
+          className="flex items-center"
+          onSubmit={handleSearch}
+        >
+          <input
+            id="q"
+            aria-label="Search contacts"
+            placeholder="Buscar productos"
+            type="search"
+            name="q"
+            value={searcherWord}
+            onChange={(e) => setSearcherWord(e.target.value)}
+            className="border p-2 rounded-l outline-none"
+          />
+          <button
+            type="submit"
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-r"
+          >
+            Buscar
+          </button>
+        </form>
+        <div className="flex items-center space-x-4">
+          <Link to="/carrito">
+            <div className="relative group">
+              <ShoppingCartIcon className="w-8 h-8" title="Mi Carrito" />
+              {itemsInCart > 0 && (
+                <div className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-semibold rounded-full w-5 h-5 flex items-center justify-center">
+                  {itemsInCart}
+                </div>
+              )}
+            </div>
+          </Link>
+          <button
+            className="text-blue-500 hover:text-blue-700"
+            onClick={handleLogin}
+          >
+            Iniciar sesión
+          </button>
         </div>
       </div>
-      {dropdown}
-    </>
+    </div>
+    {dropdown}
+  </>
   );
 }
 

@@ -10,8 +10,8 @@ function App() {
     <>
       <CartProvider>
         <BrowserRouter>
-        {isMobile ? <AppMobile />: <AppDesktop /> }
-        {/* {isMobile ? <AppDesktop />: <AppMobile /> } */}
+        {isMobile ? <AppDesktop />: <AppMobile /> }
+        {/* {isMobile ? <AppMobile />: <AppDesktop /> } */}
         </BrowserRouter>
       </CartProvider>
     </>

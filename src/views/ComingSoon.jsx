@@ -6,7 +6,7 @@ function ComingSoon() {
           <h1 className="text-3xl font-semibold mb-4">MUY PRONTO</h1>
           <p className="text-gray-600">
             Estamos trabajando en nuevas mejoras. ¡Vuelve pronto para descubrir
-            lo que tenemos preparado para ti!
+            lo que tenemos preparado para ti!.
           </p>
         </div>
       </div>
