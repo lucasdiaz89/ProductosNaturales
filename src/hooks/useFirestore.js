@@ -80,26 +80,32 @@ export const FilterCollectionLimit = (
   const [errorBd, setErrorBd] = useState(null);
 
   useEffect(() => {
-    const queryFilter = query(
-      collection(db, collectionName),
-      where(filterDocument, operator, filter),
-      limit(limitArray)
-    );
+    if (filter === "") {
+      setDataBD([]);
+      setErrorBd(null);
+      setLoadingBd(false);
+    } else {
+      const queryFilter = query(
+        collection(db, collectionName),
+        where(filterDocument, operator, filter),
+        limit(limitArray)
+      );
 
-    getDocs(queryFilter)
-      .then((res) => {
-        if (res.size !== 0) {
-          setDataBD(res.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
-        } else {
-          setErrorBd("No se encontró " + filter + " en " + collectionName);
-        }
-      })
-      .catch((error) => {
-        setErrorBd(error);
-      })
-      .finally(() => {
-        setLoadingBd(false);
-      });
+      getDocs(queryFilter)
+        .then((res) => {
+          if (res.size !== 0) {
+            setDataBD(res.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
+          } else {
+            setErrorBd("No se encontró " + filter + " en " + collectionName);
+          }
+        })
+        .catch((error) => {
+          setErrorBd(error);
+        })
+        .finally(() => {
+          setLoadingBd(false);
+        });
+    }
   }, [filter]);
 
   return { dataBD, loadingBd, errorBd };
@@ -123,8 +129,8 @@ export const FilterAllCollection = (
 
     getDocs(queryFilter)
       .then((res) => {
-        if (res.size!==0) {
-          setDataBD(res.docs.map((doc) => ({ id: doc.id, ...doc.data() })));          
+        if (res.size !== 0) {
+          setDataBD(res.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
         } else {
           setErrorBd(
             "No se pudo realizar el pedido, intentelo nuevamente mas tarde, dispculpe las molestias"
@@ -149,24 +155,74 @@ export const AddDocument = (collectionName, order) => {
 
   const itemsRef = collection(db, collectionName);
 
+  addDoc(itemsRef, order)
+    .then((res) => {
+      if (res.exists()) {
+        setDataMO({ id: res.id, ...res.data() });
+      } else {
+        setErrorMO("No se encontró " + filter + " en " + collectionName);
+      }
+    })
+    .catch((error) => {
+      setErrorMO(error);
+    })
+    .finally(() => {
+      setLoadingMO(false);
+    });
+  return { dataMO, loadingMO, errorMO };
+};
+
+export const FilterCollectionWord = (
+  collectionName,
+  filterDocument,
+  filter
+) => {
+  const [dataRes, setDataRes] = useState([]);
+  const [loadingRes, setLoadingRes] = useState(true);
+  const [errorRes, setErrorRes] = useState(null);
+
+  useEffect(() => {
+    const queryFilter = query(
+      collection(db, collectionName),
+      where(filterDocument, ">=", filter)
+    );
+  }, [filter]);
 
   addDoc(itemsRef, order)
-      .then((res) => {
-        if (res.exists()) {
-          setDataMO({ id: res.id, ...res.data() });
-        } else {
-          setErrorMO("No se encontró " + filter + " en " + collectionName);
-        }
-      })
-      .catch((error) => {
-        setErrorMO(error);
-      })
-      .finally(() => {
-        setLoadingMO(false);
-      });
-
-
-
+    .then((res) => {
+      if (res.exists()) {
+        setDataMO({ id: res.id, ...res.data() });
+      } else {
+        setErrorMO("No se encontró " + filter + " en " + collectionName);
+      }
+    })
+    .catch((error) => {
+      setErrorMO(error);
+    })
+    .finally(() => {
+      setLoadingMO(false);
+    });
 
   return { dataMO, loadingMO, errorMO };
+};
+
+export const fetchItems = async (ItemsSearch) => {
+  try {
+    console.log(ItemsSearch);
+    const promises = ItemsSearch.map(async (item) => {
+      const itemRef = doc(db, "Productos", item.productId);
+
+      const res = await getDoc(itemRef);
+
+      if (res.exists()) {
+        return { id: res.id, ...res.data() };
+      } else {
+        throw new Error();
+      }
+    });
+    const itemsData = await Promise.all(promises);
+    return itemsData;
+  } catch (error) {
+    throw new Error(error);
+  }
 };

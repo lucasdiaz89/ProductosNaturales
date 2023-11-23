@@ -3,8 +3,7 @@ import { useCart } from "../context/CartContext";
 import { Link } from "react-router-dom";
 
 function NavBarHorizontal() {
-  const { cart } = useCart();
-  const cartItemCount = cart.reduce((sum, item) => sum + item.productCount, 0);
+  const { itemsInCart } = useCart();
 console.log("navBarHorizontal");
   return (
     <div className="fixed top-0 left-0 right-0 z-50">
@@ -20,9 +19,9 @@ console.log("navBarHorizontal");
           <Link to="/carrito">
             <div className="relative group">
               <ShoppingCartIcon className="w-8 h-8" title="Mi Carrito" />
-              {cartItemCount > 0 && (
+              {itemsInCart > 0 && (
                 <div className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-semibold rounded-full w-5 h-5 flex items-center justify-center">
-                  {cartItemCount}
+                  {itemsInCart}
                 </div>
               )}
             </div>

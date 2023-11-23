@@ -8,10 +8,13 @@ import ErrorPage from "../componentsUI/ErrorPage";
 
 function Product() {
   const { productId } = useParams();
-  const { cart, addToCart, updateQuantity } = useCart();
-  const { dataBD, loadingBd, errorBd } = GetDocumentById("Productos", productId);
+  const { isInCart, itemInACart, addToCart, updateQuantity } = useCart();
+  const { dataBD, loadingBd, errorBd } = GetDocumentById(
+    "Productos",
+    productId
+  );
 
-  const cartItem = cart.find((ls) => ls.productId === productId);
+  const cartItem = itemInACart(productId);
   const cartItemCount = cartItem?.productCount || 0;
 
   const [productPage, setProductPage] = useState(null);
@@ -40,14 +43,10 @@ function Product() {
   const handleAddToCart = () => {
     const newItemCart = {
       productId: productPage.id,
-      productCount: cartItemCount,
+      productCount: quantity,
     };
 
-    const existingItem = cart.find(
-      (item) => item.productId === newItemCart.productId
-    );
-
-    if (existingItem) {
+    if (isInCart(newItemCart.productId)) {
       updateQuantity(newItemCart);
     } else {
       addToCart(newItemCart);
@@ -76,8 +75,17 @@ function Product() {
 
   return (
     <div className="flex flex-col md:flex-row p-4">
-      <div className="w-[36rem] mt-2 mb-2 ml-1 mr-1">
-        <div className="w-3/4p-4">
+      <div
+        className={`w-[36rem] mt-2 mb-2 ml-1 mr-1 relative ${
+          productPage.oferta === 1 ? "border-yellow-500 border-4" : ""
+        }`}
+      >       
+        {productPage.oferta === 1 && (
+          <div className="absolute top-0 right-0 mt-2 mr-2 bg-yellow-200 py-1 px-2 rounded">
+            🔥 OFERTA
+          </div>
+        )}
+        <div className="w-3/4 p-4">
           <h1 className="text-3xl font-semibold mb-2">
             {productPage.Producto}
           </h1>
@@ -116,7 +124,7 @@ function Product() {
             </button>
           )}
         </div>
-        <div className="w-1/4 ml-4 mt-4 ">
+        <div className="w-1/4 ml-4 mt-4">
           <img
             src={productPage.url}
             alt={productPage.Producto}
@@ -129,6 +137,7 @@ function Product() {
         <SideBar
           category={productPage.categoria}
           orientation="vertical"
+          productsSeller={[]}
         />
       )}
     </div>

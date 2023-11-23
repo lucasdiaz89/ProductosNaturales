@@ -10,6 +10,7 @@ import NotFound from "./views/NotFound";
 import Product from "./views/Product";
 import Results from "./views/Results";
 import ShoppingCart from "./views/ShoppingCart";
+import OrderMade from "./views/OrderMade";
 
 function App() {
   return (
@@ -32,10 +33,11 @@ function App() {
                     element={<Product />}
                   />
                   <Route path="/carrito" element={<ShoppingCart />} />
-                  <Route path="/result/:searcherWord" element={<Results />} />
+                  <Route path="/resultado/:searcherWord" element={<Results />} />
                   <Route path="*" element={<NotFound />} />
                   <Route path="/favoritos" element={<Favorites />} />
-                  <Route path="/comingSoon" element={<ComingSoon />} />
+                  <Route path="/muyPronto" element={<ComingSoon />} />
+                  <Route path="/miPedido/:idOrder" element={<OrderMade />} />                  
                 </Routes>
               </div>
             </div>

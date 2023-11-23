@@ -3,10 +3,9 @@ import { useCart } from "../context/CartContext";
 import { Link } from "react-router-dom";
 
 function Card({ product, categoryId }) {
-  const { cart, addToCart, updateQuantity } = useCart();
-  const cartItem = cart.find((ls) => ls.productId === product.id);
-  const [isACart, setIsACart] = useState(cartItem);
-  const [quantity, setQuantity] = useState(isACart ? cartItem.productCount : 1);
+  const { cartStorage,isInCart,itemInACart,addToCart, updateQuantity } = useCart();
+  const cartItem =itemInACart(product.id);
+  const [quantity, setQuantity] = useState(isInCart(product.id) ? cartItem.productCount : 1);
 
   const increment = () => {
     if (quantity < 10) {
@@ -20,19 +19,19 @@ function Card({ product, categoryId }) {
     }
   };
 
-  const handleAddToCart = (newProduct, newQuantity) => {
+  const handleAddToCart = (newProduct, quantity) => {
     const newItemCart={
       productId:newProduct.id,
-      productCount:newQuantity
+      productCount:quantity
     }
-    cart.some((ls) => ls.productId === newItemCart.Id)
+    console.log(newItemCart);
+    isInCart(newItemCart.productId)
       ? updateQuantity(newItemCart)
       : addToCart(newItemCart);
   };
 
   return (
-    <div className="w-full w-52 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 text-center">
-      <img
+    <div className="w-full w-52 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 text-center">      <img
         className="p-0.5 rounded-t-lg w-38 h-60 mx-auto"
         src={product.url}
         alt={product.Producto}

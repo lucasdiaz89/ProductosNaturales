@@ -2,7 +2,7 @@
 import { useState } from "react";
 
 export function useLocalStorage(key, initialValue) {
-  const [value, setValue] = useState(() => {
+  const [cartStorage, setCartStorage] = useState(() => {
     try {
       const storedValue = window.localStorage.getItem(key);
       return storedValue !== null ? JSON.parse(storedValue) : initialValue;
@@ -11,14 +11,14 @@ export function useLocalStorage(key, initialValue) {
     }
   });
 
-  const updateValue = (newValue) => {
+  const updateCartStorage = (newValue) => {
     try {
-      setValue(newValue);
+      setCartStorage(newValue);
       window.localStorage.setItem(key, JSON.stringify(newValue));
     } catch (err) {
       console.log("Error LocalStorage:",err);
     }
   };
 
-  return [value, updateValue];
+  return [cartStorage, updateCartStorage];
 }

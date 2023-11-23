@@ -110,10 +110,6 @@ html {
     flex-direction: column;
   }
   
-  #sidebar > * {
-    padding-left: 2rem;
-    padding-right: 2rem;
-  }
   
   #sidebar h1 {
     font-size: 1rem;

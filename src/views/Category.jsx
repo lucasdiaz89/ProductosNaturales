@@ -18,17 +18,16 @@ function Category() {
 
   useEffect(() => {
     setProducts(dataBD || []);
-    if(products.length>12){
-      const paginas=Math.ceil(products.length/3);
+    if (products.length > 12) {
+      const paginas = Math.ceil(products.length / 3);
       console.log(paginas);
     }
-    
   }, [dataBD]);
 
   if (loadingBd) {
     return <Loading type={loadingType} />;
   }
-  
+
   if (errorBd) {
     return <ErrorPage error={errorBd} />;
   }
@@ -52,7 +51,12 @@ function Category() {
           <div key="NotFoundCategory">{<ErrorPage error={errorBd} />}</div>
         ) : (
           products.map((item) => (
-            <div key={item.id}>
+            <div key={item.id} className="relative">
+              {item.oferta === 1 && (
+                <div className="absolute top-0 right-0 mt-2 mr-2 bg-yellow-200 py-1 px-2 rounded">
+                  🔥 OFERTA
+                </div>
+              )}
               <Card product={item} categoryId={categoryId} />
             </div>
           ))
