@@ -15,8 +15,18 @@ function Results() {
     const filteredProducts = dataBD.filter((item) =>
       item.Producto.toLowerCase().includes(searcherWord.toLowerCase())
     );
+    const filteredCategory = dataBD.filter((item) =>
+    item.categoria.toLowerCase().includes(searcherWord.toLowerCase())
+  );
+  const filteredProductId = dataBD.filter((item) =>
+  item.id.toLowerCase().includes(searcherWord.toLowerCase())
+);
+const combinedFilteredData = [...filteredProducts, ...filteredCategory, ...filteredProductId];
 
-    setDataConsult(filteredProducts);
+// Elimina duplicados
+const uniqueCombinedFilteredData = Array.from(new Set(combinedFilteredData));
+
+    setDataConsult(uniqueCombinedFilteredData);
   }, [dataBD,searcherWord]);
 
   if (loadingBd) {
