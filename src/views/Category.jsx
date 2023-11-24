@@ -43,7 +43,7 @@ function Category() {
         <input
           type="text"
           placeholder="Buscar productos aquí"
-          className="border p-2 rounded-l outline-none mb-2 md:mb-0 md:mr-2"
+          className="border  rounded-l outline-none mb-2 md:mb-0 md:mr-2 md:px-4 sm:pl-56 sm:mx-6"
           value={searchProd}
           onChange={(e) => setSearchProd(e.target.value)}
         />        

@@ -56,7 +56,7 @@ function Home() {
         {data.map((category) => (
           <div
             key={category.id}
-            className="relative w-full md:w-1/4 lg:w-1/4 xl:w-1/5 h-[400px] overflow-hidden mb-4"
+            className="relative w-full md:w-1/4 lg:w-1/4 xl:w-64 h-[400px] overflow-hidden mb-4"
           >
             <div
               className="w-full h-full bg-cover bg-center rounded-lg"

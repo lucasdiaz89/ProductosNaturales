@@ -15,7 +15,7 @@ function AppDesktop() {
   return (
     <div className="flex min-h-screen ">
       <NavBarMobile />
-      <div  className="flex-1 flex flex-col w-full pt-20">
+      <div  className="flex-1 flex flex-col w-full pt-32">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/productos/:categoryId" element={<Category />} />

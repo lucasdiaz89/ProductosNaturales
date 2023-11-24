@@ -75,63 +75,62 @@ function NavBarMobile() {
   }
   return (
     <>
-    <div className="fixed top-0 left-0 right-0 z-50 bg-lime-50 text-green-900">
-      <div className="flex justify-between items-center p-2 border-b">
-        <div className="flex items-center">
-          <button onClick={() => setMenuVisible(!menuVisible)}>
-            <Bars4Icon className="w-8 h-8" title="Menú" />
-          </button>
+      <div className="fixed top-0 left-0 right-0 z-50 bg-lime-50 text-green-900">
+        <div className="flex justify-between items-center p-2 border-b">
+          <div className="flex items-center">
+            <button onClick={() => setMenuVisible(!menuVisible)}>
+              <Bars4Icon className="w-6 h-6" title="Menú" />
+            </button>
+          </div>
+          <div className="flex items-center justify-center flex-grow pl-2">
+            <Link to="/">
+              <h1 className="text-l font-bold">PRODUCTOS NATURALES NORMA</h1>
+            </Link>
+          </div>
+          <div className="flex items-center space-x-4">
+            <Link to="/carrito">
+              <div className="relative group">
+                <ShoppingCartIcon className="w-6 h-6" title="Mi Carrito" />
+                {itemsInCart > 0 && (
+                  <div className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-semibold rounded-full w-5 h-5 flex items-center justify-center">
+                    {itemsInCart}
+                  </div>
+                )}
+              </div>
+            </Link>
+            <button
+              className="text-xs text-blue-500 hover:text-blue-700"
+              onClick={handleLogin}
+            >
+              Iniciar sesión
+            </button>
+          </div>
         </div>
-        <div className="flex items-center flex-grow">
-          <Link to="/">
-            <h1 className="text-xl font-bold">PRODUCTOS NATURALES NORMA</h1>
-          </Link>
-        </div>
-        <form
-          id="search-form"
-          role="search"
-          className="flex items-center"
-          onSubmit={handleSearch}
-        >
-          <input
-            id="q"
-            aria-label="Search contacts"
-            placeholder="Buscar productos"
-            type="search"
-            name="q"
-            value={searcherWord}
-            onChange={(e) => setSearcherWord(e.target.value)}
-            className="border p-2 rounded-l outline-none"
-          />
-          <button
-            type="submit"
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-r"
+        <div className="p-2">
+          <form
+            role="search"
+            className="flex items-center justify-center"
+            onSubmit={handleSearch}
           >
-            Buscar
-          </button>
-        </form>
-        <div className="flex items-center space-x-4">
-          <Link to="/carrito">
-            <div className="relative group">
-              <ShoppingCartIcon className="w-8 h-8" title="Mi Carrito" />
-              {itemsInCart > 0 && (
-                <div className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-semibold rounded-full w-5 h-5 flex items-center justify-center">
-                  {itemsInCart}
-                </div>
-              )}
-            </div>
-          </Link>
-          <button
-            className="text-blue-500 hover:text-blue-700"
-            onClick={handleLogin}
-          >
-            Iniciar sesión
-          </button>
+            <input
+              aria-label="Search contacts"
+              placeholder="Buscar productos"
+              name="q"
+              value={searcherWord}
+              onChange={(e) => setSearcherWord(e.target.value)}
+              className="border p-2 rounded-l outline-none"
+            />
+            <button
+              type="submit"
+              className="text-xs bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded-r"
+            >
+              Buscar
+            </button>
+          </form>
         </div>
       </div>
-    </div>
-    {dropdown}
-  </>
+      {dropdown}
+    </>
   );
 }
 
