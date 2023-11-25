@@ -9,12 +9,12 @@ export const ProductsSelled = [
       productId:"cod_70004"      
     },
     {
-      productId:"cod_20012"      
+      productId:"cod_20014"      
     },
     {
-      productId:"cod_11016"      
+      productId:"cod_10023"      
     },
     {
-      productId:"cod_16031"      
+      productId:"cod_19007"      
     }
   ];
